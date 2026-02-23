@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#FDB915">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>VOLMASTER - Plataforma de Gestão de Oficina</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-container">
+                <img src="imagens/logo volmaster branco.jpg" alt="VOLMASTER" class="logo">
+                <h2 class="brand-name">VOLMASTER</h2>
+            </div>
+            <button class="sidebar-toggle" id="sidebarToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item active" data-page="dashboard">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-page="clientes">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span>Clientes</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-page="veiculos">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-car"></i>
+                        <span>Veículos</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-page="ordens">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span>Ordens de Serviço</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-page="estoque">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-boxes"></i>
+                        <span>Estoque</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-page="financeiro">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>Financeiro</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-page="relatorios">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Relatórios</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-page="configuracoes">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-cog"></i>
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-details">
+                    <span class="user-name">Administrador</span>
+                    <span class="user-role">Volmaster Auto</span>
+                </div>
+            </div>
+            <button class="btn-logout">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Header -->
+        <header class="top-header">
+            <div class="header-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title" id="pageTitle">Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <div class="header-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar...">
+                </div>
+                <button class="btn-notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Page -->
+        <div class="page-content active" id="page-dashboard">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon yellow">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number">248</h3>
+                        <p class="stat-label">Clientes Ativos</p>
+                    </div>
+                    <div class="stat-trend positive">
+                        <i class="fas fa-arrow-up"></i> 12%
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number">42</h3>
+                        <p class="stat-label">OS em Andamento</p>
+                    </div>
+                    <div class="stat-trend positive">
+                        <i class="fas fa-arrow-up"></i> 8%
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number">R$ 89.750</h3>
+                        <p class="stat-label">Faturamento Mensal</p>
+                    </div>
+                    <div class="stat-trend positive">
+                        <i class="fas fa-arrow-up"></i> 23%
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 class="stat-number">156</h3>
+                        <p class="stat-label">Peças em Estoque</p>
+                    </div>
+                    <div class="stat-trend negative">
+                        <i class="fas fa-arrow-down"></i> 5%
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h3>Faturamento Anual</h3>
+                        <select class="chart-filter">
+                            <option>2026</option>
+                            <option>2025</option>
+                        </select>
+                    </div>
+                    <div class="chart-placeholder">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h3>Serviços Mais Realizados</h3>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-name">Troca de Óleo</span>
+                            <div class="service-bar">
+                                <div class="service-progress" style="width: 85%"></div>
+                            </div>
+                            <span class="service-value">85%</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-name">Alinhamento</span>
+                            <div class="service-bar">
+                                <div class="service-progress" style="width: 72%"></div>
+                            </div>
+                            <span class="service-value">72%</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-name">Freios</span>
+                            <div class="service-bar">
+                                <div class="service-progress" style="width: 65%"></div>
+                            </div>
+                            <span class="service-value">65%</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-name">Suspensão</span>
+                            <div class="service-bar">
+                                <div class="service-progress" style="width: 58%"></div>
+                            </div>
+                            <span class="service-value">58%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders Table -->
+            <div class="table-card">
+                <div class="card-header">
+                    <h3>Ordens de Serviço Recentes</h3>
+                    <button class="btn-primary btn-sm">Ver Todas</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>OS</th>
+                                <th>Cliente</th>
+                                <th>Veículo</th>
+                                <th>Serviço</th>
+                                <th>Status</th>
+                                <th>Valor</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#2401</td>
+                                <td>João Silva</td>
+                                <td>Volvo FH 540</td>
+                                <td>Manutenção Preventiva</td>
+                                <td><span class="badge badge-warning">Em Andamento</span></td>
+                                <td>R$ 2.500,00</td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#2402</td>
+                                <td>Maria Santos</td>
+                                <td>Scania R450</td>
+                                <td>Diagnóstico Eletrônico</td>
+                                <td><span class="badge badge-success">Concluída</span></td>
+                                <td>R$ 850,00</td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#2403</td>
+                                <td>Pedro Costa</td>
+                                <td>Volvo FM 380</td>
+                                <td>Troca de Freios</td>
+                                <td><span class="badge badge-info">Aguardando Peças</span></td>
+                                <td>R$ 3.200,00</td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clientes Page -->
+        <div class="page-content" id="page-clientes">
+            <div class="page-header">
+                <h2>Gestão de Clientes</h2>
+                <button class="btn-primary" onclick="alert('Funcionalidade em desenvolvimento')">
+                    <i class="fas fa-plus"></i> Novo Cliente
+                </button>
+            </div>
+
+            <div class="filter-bar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Buscar cliente...">
+                </div>
+                <select class="filter-select">
+                    <option>Todos os Status</option>
+                    <option>Ativos</option>
+                    <option>Inativos</option>
+                </select>
+            </div>
+
+            <div class="table-card">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>CPF/CNPJ</th>
+                                <th>Telefone</th>
+                                <th>Email</th>
+                                <th>Veículos</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#001</td>
+                                <td>João Silva</td>
+                                <td>123.456.789-00</td>
+                                <td>(62) 98765-4321</td>
+                                <td>joao@email.com</td>
+                                <td>2</td>
+                                <td><span class="badge badge-success">Ativo</span></td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#002</td>
+                                <td>Maria Santos</td>
+                                <td>987.654.321-00</td>
+                                <td>(62) 99876-5432</td>
+                                <td>maria@email.com</td>
+                                <td>1</td>
+                                <td><span class="badge badge-success">Ativo</span></td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#003</td>
+                                <td>Pedro Costa</td>
+                                <td>456.789.123-00</td>
+                                <td>(62) 98123-4567</td>
+                                <td>pedro@email.com</td>
+                                <td>3</td>
+                                <td><span class="badge badge-success">Ativo</span></td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Veículos Page -->
+        <div class="page-content" id="page-veiculos">
+            <div class="page-header">
+                <h2>Gestão de Veículos</h2>
+                <button class="btn-primary" onclick="alert('Funcionalidade em desenvolvimento')">
+                    <i class="fas fa-plus"></i> Novo Veículo
+                </button>
+            </div>
+
+            <div class="vehicles-grid">
+                <div class="vehicle-card">
+                    <div class="vehicle-image-placeholder">
+                        <i class="fas fa-truck"></i>
+                        <p>Volvo FH 540</p>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Volvo FH 540</h3>
+                        <p><strong>Placa:</strong> ABC-1234</p>
+                        <p><strong>Proprietário:</strong> João Silva</p>
+                        <p><strong>Ano:</strong> 2020</p>
+                        <div class="vehicle-status">
+                            <span class="badge badge-success">Em Dia</span>
+                        </div>
+                    </div>
+                    <div class="vehicle-actions">
+                        <button class="btn-action"><i class="fas fa-eye"></i></button>
+                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                    </div>
+                </div>
+
+                <div class="vehicle-card">
+                    <div class="vehicle-image-placeholder">
+                        <i class="fas fa-truck"></i>
+                        <p>Scania R450</p>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Scania R450</h3>
+                        <p><strong>Placa:</strong> XYZ-5678</p>
+                        <p><strong>Proprietário:</strong> Maria Santos</p>
+                        <p><strong>Ano:</strong> 2019</p>
+                        <div class="vehicle-status">
+                            <span class="badge badge-warning">Manutenção Pendente</span>
+                        </div>
+                    </div>
+                    <div class="vehicle-actions">
+                        <button class="btn-action"><i class="fas fa-eye"></i></button>
+                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                    </div>
+                </div>
+
+                <div class="vehicle-card">
+                    <div class="vehicle-image-placeholder">
+                        <i class="fas fa-truck"></i>
+                        <p>Volvo FM 380</p>
+                    </div>
+                    <div class="vehicle-info">
+                        <h3>Volvo FM 380</h3>
+                        <p><strong>Placa:</strong> DEF-9012</p>
+                        <p><strong>Proprietário:</strong> Pedro Costa</p>
+                        <p><strong>Ano:</strong> 2021</p>
+                        <div class="vehicle-status">
+                            <span class="badge badge-success">Em Dia</span>
+                        </div>
+                    </div>
+                    <div class="vehicle-actions">
+                        <button class="btn-action"><i class="fas fa-eye"></i></button>
+                        <button class="btn-action"><i class="fas fa-edit"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ordens de Serviço Page -->
+        <div class="page-content" id="page-ordens">
+            <div class="page-header">
+                <h2>Ordens de Serviço</h2>
+                <button class="btn-primary" onclick="alert('Funcionalidade em desenvolvimento')">
+                    <i class="fas fa-plus"></i> Nova OS
+                </button>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active">Todas</button>
+                <button class="filter-btn">Em Andamento</button>
+                <button class="filter-btn">Concluídas</button>
+                <button class="filter-btn">Aguardando Peças</button>
+                <button class="filter-btn">Canceladas</button>
+            </div>
+
+            <div class="os-grid">
+                <div class="os-card">
+                    <div class="os-header">
+                        <h3>OS #2401</h3>
+                        <span class="badge badge-warning">Em Andamento</span>
+                    </div>
+                    <div class="os-body">
+                        <p><strong>Cliente:</strong> João Silva</p>
+                        <p><strong>Veículo:</strong> Volvo FH 540 - ABC-1234</p>
+                        <p><strong>Serviço:</strong> Manutenção Preventiva</p>
+                        <p><strong>Mecânico:</strong> Carlos Souza</p>
+                        <p><strong>Prazo:</strong> 25/02/2026</p>
+                    </div>
+                    <div class="os-footer">
+                        <span class="os-value">R$ 2.500,00</span>
+                        <button class="btn-secondary btn-sm">Detalhes</button>
+                    </div>
+                </div>
+
+                <div class="os-card">
+                    <div class="os-header">
+                        <h3>OS #2402</h3>
+                        <span class="badge badge-success">Concluída</span>
+                    </div>
+                    <div class="os-body">
+                        <p><strong>Cliente:</strong> Maria Santos</p>
+                        <p><strong>Veículo:</strong> Scania R450 - XYZ-5678</p>
+                        <p><strong>Serviço:</strong> Diagnóstico Eletrônico</p>
+                        <p><strong>Mecânico:</strong> Ricardo Lima</p>
+                        <p><strong>Prazo:</strong> 22/02/2026</p>
+                    </div>
+                    <div class="os-footer">
+                        <span class="os-value">R$ 850,00</span>
+                        <button class="btn-secondary btn-sm">Detalhes</button>
+                    </div>
+                </div>
+
+                <div class="os-card">
+                    <div class="os-header">
+                        <h3>OS #2403</h3>
+                        <span class="badge badge-info">Aguardando Peças</span>
+                    </div>
+                    <div class="os-body">
+                        <p><strong>Cliente:</strong> Pedro Costa</p>
+                        <p><strong>Veículo:</strong> Volvo FM 380 - DEF-9012</p>
+                        <p><strong>Serviço:</strong> Troca de Freios</p>
+                        <p><strong>Mecânico:</strong> João Oliveira</p>
+                        <p><strong>Prazo:</strong> 28/02/2026</p>
+                    </div>
+                    <div class="os-footer">
+                        <span class="os-value">R$ 3.200,00</span>
+                        <button class="btn-secondary btn-sm">Detalhes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estoque Page -->
+        <div class="page-content" id="page-estoque">
+            <div class="page-header">
+                <h2>Controle de Estoque</h2>
+                <button class="btn-primary" onclick="alert('Funcionalidade em desenvolvimento')">
+                    <i class="fas fa-plus"></i> Nova Peça
+                </button>
+            </div>
+
+            <div class="stats-grid mb-4">
+                <div class="stat-card-small">
+                    <i class="fas fa-boxes"></i>
+                    <div>
+                        <h4>156</h4>
+                        <p>Total de Itens</p>
+                    </div>
+                </div>
+                <div class="stat-card-small">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div>
+                        <h4>12</h4>
+                        <p>Estoque Baixo</p>
+                    </div>
+                </div>
+                <div class="stat-card-small">
+                    <i class="fas fa-chart-line"></i>
+                    <div>
+                        <h4>R$ 45.320</h4>
+                        <p>Valor em Estoque</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Quantidade</th>
+                                <th>Valor Unitário</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>PC001</td>
+                                <td>Filtro de Óleo Volvo</td>
+                                <td>Filtros</td>
+                                <td>25</td>
+                                <td>R$ 85,00</td>
+                                <td>R$ 2.125,00</td>
+                                <td><span class="badge badge-success">Em Estoque</span></td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PC002</td>
+                                <td>Pastilhas de Freio Scania</td>
+                                <td>Freios</td>
+                                <td>8</td>
+                                <td>R$ 320,00</td>
+                                <td>R$ 2.560,00</td>
+                                <td><span class="badge badge-warning">Estoque Baixo</span></td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>PC003</td>
+                                <td>Correia Dentada Volvo</td>
+                                <td>Motor</td>
+                                <td>15</td>
+                                <td>R$ 450,00</td>
+                                <td>R$ 6.750,00</td>
+                                <td><span class="badge badge-success">Em Estoque</span></td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-action"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financeiro Page -->
+        <div class="page-content" id="page-financeiro">
+            <div class="page-header">
+                <h2>Gestão Financeira</h2>
+                <button class="btn-primary" onclick="alert('Funcionalidade em desenvolvimento')">
+                    <i class="fas fa-plus"></i> Novo Lançamento
+                </button>
+            </div>
+
+            <div class="financial-summary">
+                <div class="financial-card receitas">
+                    <i class="fas fa-arrow-up"></i>
+                    <div>
+                        <p>Receitas do Mês</p>
+                        <h3>R$ 89.750,00</h3>
+                    </div>
+                </div>
+                <div class="financial-card despesas">
+                    <i class="fas fa-arrow-down"></i>
+                    <div>
+                        <p>Despesas do Mês</p>
+                        <h3>R$ 32.450,00</h3>
+                    </div>
+                </div>
+                <div class="financial-card saldo">
+                    <i class="fas fa-dollar-sign"></i>
+                    <div>
+                        <p>Saldo do Mês</p>
+                        <h3>R$ 57.300,00</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-card">
+                <div class="card-header">
+                    <h3>Lançamentos Recentes</h3>
+                    <select class="chart-filter">
+                        <option>Fevereiro 2026</option>
+                        <option>Janeiro 2026</option>
+                    </select>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Tipo</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>23/02/2026</td>
+                                <td>OS #2402 - Maria Santos</td>
+                                <td>Serviços</td>
+                                <td><span class="badge badge-success">Receita</span></td>
+                                <td class="text-success">R$ 850,00</td>
+                                <td><span class="badge badge-success">Pago</span></td>
+                            </tr>
+                            <tr>
+                                <td>22/02/2026</td>
+                                <td>Compra de Peças - Fornecedor A</td>
+                                <td>Estoque</td>
+                                <td><span class="badge badge-danger">Despesa</span></td>
+                                <td class="text-danger">R$ 3.200,00</td>
+                                <td><span class="badge badge-success">Pago</span></td>
+                            </tr>
+                            <tr>
+                                <td>20/02/2026</td>
+                                <td>OS #2401 - João Silva</td>
+                                <td>Serviços</td>
+                                <td><span class="badge badge-success">Receita</span></td>
+                                <td class="text-success">R$ 2.500,00</td>
+                                <td><span class="badge badge-warning">Pendente</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Relatórios Page -->
+        <div class="page-content" id="page-relatorios">
+            <div class="page-header">
+                <h2>Relatórios e Análises</h2>
+            </div>
+
+            <div class="reports-grid">
+                <div class="report-card">
+                    <i class="fas fa-file-chart-line"></i>
+                    <h3>Relatório de Faturamento</h3>
+                    <p>Análise completa do faturamento mensal e anual</p>
+                    <button class="btn-secondary" onclick="alert('Gerando relatório...')">Gerar Relatório</button>
+                </div>
+
+                <div class="report-card">
+                    <i class="fas fa-users-cog"></i>
+                    <h3>Relatório de Clientes</h3>
+                    <p>Visão geral da base de clientes e histórico</p>
+                    <button class="btn-secondary" onclick="alert('Gerando relatório...')">Gerar Relatório</button>
+                </div>
+
+                <div class="report-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Relatório de Serviços</h3>
+                    <p>Serviços mais realizados e tempo médio</p>
+                    <button class="btn-secondary" onclick="alert('Gerando relatório...')">Gerar Relatório</button>
+                </div>
+
+                <div class="report-card">
+                    <i class="fas fa-box-open"></i>
+                    <h3>Relatório de Estoque</h3>
+                    <p>Movimentação e valor do estoque</p>
+                    <button class="btn-secondary" onclick="alert('Gerando relatório...')">Gerar Relatório</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Configurações Page -->
+        <div class="page-content" id="page-configuracoes">
+            <div class="page-header">
+                <h2>Configurações do Sistema</h2>
+            </div>
+
+            <div class="settings-grid">
+                <div class="settings-card">
+                    <h3><i class="fas fa-user-cog"></i> Dados da Oficina</h3>
+                    <form class="settings-form" onsubmit="event.preventDefault(); alert('Configurações salvas!');">
+                        <div class="form-group">
+                            <label>Nome da Oficina</label>
+                            <input type="text" class="form-control" value="Volmaster Auto">
+                        </div>
+                        <div class="form-group">
+                            <label>CNPJ</label>
+                            <input type="text" class="form-control" value="12.345.678/0001-00">
+                        </div>
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="text" class="form-control" value="(62) 3290-0519">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" value="contato@volmaster.com.br">
+                        </div>
+                        <button type="submit" class="btn-primary">Salvar Alterações</button>
+                    </form>
+                </div>
+
+                <div class="settings-card">
+                    <h3><i class="fas fa-bell"></i> Notificações</h3>
+                    <div class="settings-toggle">
+                        <label>Email sobre novas OS</label>
+                        <input type="checkbox" checked>
+                    </div>
+                    <div class="settings-toggle">
+                        <label>Alerta de estoque baixo</label>
+                        <input type="checkbox" checked>
+                    </div>
+                    <div class="settings-toggle">
+                        <label>Lembrete de pagamentos</label>
+                        <input type="checkbox">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>
