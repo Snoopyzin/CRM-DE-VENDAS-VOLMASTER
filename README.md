@@ -9,7 +9,15 @@ Plataforma completa de gestão para oficinas automotivas, desenvolvida com foco 
 ### 📊 Dashboard
 - Visão geral de métricas importantes
 - Estatísticas em tempo real
-- Gráficos de faturamento
+- Gráficos de faturamento e performance
+- **Gráfico de Performance** (topo): Faturamento e OS completas
+- **Mecânicos em Atividade**: Perfis com fotos, avaliações e estatísticas
+  - Gabriel Alexandre (4⭐) - 1 ano e 2 meses de experiência
+  - Matheus Uai (5⭐) - 4 anos de experiência
+  - Jesuino Vieira (5⭐) - 30 anos de experiência - **LENDA**
+- **Serviços Oferecidos**: Lista completa com preços e duração
+- **Baias de Trabalho**: Visualização em tempo real com veículos Volvo
+- Sistema de gerenciamento de mecânicos (adicionar, editar, remover)
 - Serviços mais realizados
 - Ordens de serviço recentes
 
@@ -20,10 +28,21 @@ Plataforma completa de gestão para oficinas automotivas, desenvolvida com foco 
 - Controle de veículos por cliente
 
 ### 🚚 Gestão de Veículos
-- Cadastro de veículos (Volvo, Scania, etc)
+- Cadastro de veículos (especialização em Volvo)
+- Modelos suportados: FH, FM, FH16, FMX, VM
 - Ficha técnica completa
 - Histórico de manutenções
 - Status de manutenção
+- Visualização em tempo real nas baias de trabalho
+
+### 👨‍🔧 Gestão de Mecânicos
+- **Mecânicos cadastrados com fotos reais**
+- Sistema de avaliação por estrelas (1-5)
+- Estatísticas individuais (OS completas, tempo na empresa)
+- Badge especial para mecânicos "LENDA" (30+ anos)
+- Modal de gerenciamento (adicionar, editar, remover)
+- Proteção contra exclusão de mecânicos especiais
+- Exibição de descrições personalizadas
 
 ### 📝 Ordens de Serviço
 - Criação de novas OS
@@ -65,14 +84,22 @@ Plataforma completa de gestão para oficinas automotivas, desenvolvida com foco 
 ### Tipografia
 - **Fonte Principal**: Segoe UI, Tahoma, Geneva, Verdana, sans-serif
 
+### Animações e Efeitos
+- **AOS (Animate On Scroll)**: Animações de entrada suaves
+- **Pulse Animation**: Badge de "LENDA" com efeito pulsante
+- **Hover Effects**: Transições suaves em cards e botões
+- **Gradient Backgrounds**: Gradientes especiais para mecânicos lendários
+- **Box Shadows**: Sombras amarelas para destaque
+
 ## 🛠️ Tecnologias Utilizadas
 
 - **HTML5**: Estrutura semântica
 - **CSS3**: Estilização moderna com Grid e Flexbox
 - **JavaScript**: Interatividade e funcionalidades
-- **Bootstrap 5.3**: Framework CSS
-- **Font Awesome 6.4**: Ícones
-- **Chart.js**: Gráficos e visualizações
+- **Bootstrap 5.3**: Framework CSS e componentes
+- **Font Awesome 6.4**: Ícones (incluindo sistema de estrelas)
+- **Chart.js**: Gráficos e visualizações de dados
+- **AOS 2.3.4**: Animações on scroll para experiência fluida
 
 ## 📱 Responsividade
 
@@ -110,18 +137,30 @@ A plataforma é totalmente responsiva e funciona perfeitamente em:
 - Aplique filtros para refinar resultados
 - Ordene colunas de tabelas
 
+#### Gerenciar Mecânicos
+- Clique em "Gerenciar Mecânicos" no dashboard
+- **Adicionar**: Preencha o formulário com nome, foto, especialidade, experiência e avaliação
+- **Editar**: Clique no botão "Editar" na tabela para modificar dados
+- **Remover**: Clique no botão "Remover" (mecânicos especiais são protegidos)
+- Sistema de avaliação com estrelas visuais
+- Upload de fotos para cada mecânico
+
 ## 📂 Estrutura de Arquivos
 
 ```
-site serviços volmaster/
+gestão oficina volmaster/
 ├── index.html          # Página principal
 ├── css/
 │   └── style.css      # Estilos da plataforma
 ├── js/
 │   └── script.js      # JavaScript principal
 ├── imagens/
-│   └── logo volmaster branco.jpg  # Logo da marca
-└── README.md          # Este arquivo
+│   ├── logo volmaster branco.jpg  # Logo da marca
+│   ├── Gabriel Mecanico.png       # Foto do mecânico Gabriel
+│   ├── Matheus Mecanico.png       # Foto do mecânico Matheus
+│   └── Jesuino Mecanico.png       # Foto do mecânico Jesuino
+├── README.md                       # Este arquivo
+└── MOBILE_IMPROVEMENTS.md          # Documentação de melhorias mobile
 ```
 
 ## 🔧 Personalização

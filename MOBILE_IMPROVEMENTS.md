@@ -243,3 +243,101 @@ Todas as melhorias foram implementadas seguindo as melhores práticas de:
 - Progressive Web App best practices
 
 **Testado e otimizado para uma experiência mobile excepcional! 🎉**
+
+---
+
+## 🆕 Atualização v2.0 - Fevereiro 2026
+
+### 🎯 Foco 100% VOLVO
+
+#### **Remoção de Outras Marcas**
+Todas as referências a Mercedes e Scania foram substituídas por modelos VOLVO:
+
+**Boxes/Baias Atualizados:**
+- Baia 3: Scania R450 → **Volvo FMX 500**
+- Baia 5: Mercedes Actros → **Volvo FH16 750**
+- Baia 7: Scania P320 → **Volvo VM 270**
+
+**Alertas e Agenda:**
+- Alerta: "Pastilhas Scania" → **"Kit Embreagem Volvo"**
+- Agenda 08:00: "Scania - Diagnóstico" → **"Volvo FH 540 - Troca Injetores"**
+- Agenda 14:00: "Mercedes - Revisão" → **"Volvo FMX 500 - Bronzinamento"**
+
+### 🛠️ Novos Serviços Especializados
+
+#### **Seção "Serviços Especializados VOLVO"**
+Nova seção visual com 5 serviços premium:
+
+1. **🔧 Bronzinamento** - Virabrequim e bielas
+2. **⚙️ Troca de Embreagem** - Kit completo original
+3. **💧 Troca de Injetores** - Sistema diesel Volvo
+4. **🚛 Troca de Kit Motor** - Pistões, anéis, bronzinas
+5. **⚙️ Recondicionamento Caixa** - Câmbio completo
+
+**Features dos Cards:**
+- Badge "VOLVO" destacado em amarelo
+- Imagens profissionais em HD (Unsplash)
+- Gradiente overlay para contraste
+- Hover effect com elevação 3D
+- Botão "Solicitar Orçamento"
+- **100% Responsivo**
+
+### 📱 Otimização Específica iPhone XR
+
+#### **Novo Breakpoint @media (max-width: 414px)**
+- KPIs financeiros: padding 14px, ícones 50px
+- Fontes reajustadas: números 1.6rem, labels 0.75rem
+- Grade de serviços: **1 coluna em iPhone XR**
+- Cards compactos mas legíveis
+- Touch targets mínimos 44px mantidos
+
+#### **Grid Responsivo Serviços**
+```css
+Desktop (>768px): repeat(auto-fit, minmax(280px, 1fr))
+Tablet (≤768px): 2 colunas
+iPhone XR (≤414px): 1 coluna
+Mobile (≤480px): 1 coluna compacta
+```
+
+### 📊 Lista de Serviços Atualizada
+
+**Serviços Mais Realizados:**
+1. Troca de Óleo Volvo - 85%
+2. Troca de Embreagem - 78%
+3. Troca de Injetores - 72%
+4. Bronzinamento - 68%
+5. Troca de Kit Motor - 61%
+6. Recondicionamento Caixa - 55%
+
+### ✅ Melhorias Aplicadas
+
+- ✅ Layout iPhone XR completamente otimizado
+- ✅ Todas referências Mercedes/Scania removidas
+- ✅ 5 novos serviços especializados VOLVO
+- ✅ Imagens profissionais em todos os cards
+- ✅ Sistema de grid totalmente responsivo
+- ✅ Touch optimization mantido e melhorado
+- ✅ Performance preservada (transições suaves)
+
+---
+
+**🔧 Desenvolvido por:** GitHub Copilot  
+**📅 Data:** 24 de fevereiro de 2026  
+**🚀 Versão:** 2.2 - Imagens 100% VOLVO  
+**🎨 Status:** Pronto para produção! ✨
+
+### 🚛 Atualização v2.2 - Imagens Autênticas de Caminhões VOLVO
+
+#### **Seleção de Imagens**
+Todas as imagens agora mostram **caminhões VOLVO reais**:
+- **Bronzinamento:** Caminhão Volvo em operação
+- **Troca de Embreagem:** Caminhão Volvo pesado
+- **Troca de Injetores:** ✅ Mantida - serviço técnico detalhado (preferência do cliente)
+- **Troca de Kit Motor:** Caminhão Volvo em manutenção
+- **Recondicionamento Caixa:** Frota de caminhões Volvo
+
+#### **Melhorias Visuais**
+- Gradiente escuro sutil (rgba 0.2 → 0.4) para legibilidade
+- Badge VOLVO destacado com z-index
+- Imagens em alta resolução (800x600px)
+- **100% foco em caminhões Volvo** - sem outras marcas

@@ -272,6 +272,121 @@ function initCharts() {
             }
         });
     }
+    
+    // Top Performance Chart
+    const topPerformanceChart = document.getElementById('topPerformanceChart');
+    if (topPerformanceChart && typeof Chart !== 'undefined') {
+        const ctx = topPerformanceChart.getContext('2d');
+        
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [
+                    {
+                        label: 'Faturamento',
+                        data: [45000, 52000, 48000, 65000, 58000, 72000, 68000, 75000, 82000, 78000, 85000, 89750],
+                        backgroundColor: 'rgba(253, 185, 21, 0.8)',
+                        borderColor: '#FDB915',
+                        borderWidth: 2,
+                        borderRadius: 6,
+                        yAxisID: 'y'
+                    },
+                    {
+                        label: 'OS Completas',
+                        data: [32, 38, 35, 42, 40, 48, 45, 50, 52, 48, 55, 58],
+                        backgroundColor: 'rgba(33, 150, 243, 0.8)',
+                        borderColor: '#2196F3',
+                        borderWidth: 2,
+                        borderRadius: 6,
+                        yAxisID: 'y1'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#a0a0a0',
+                            font: {
+                                size: 12
+                            },
+                            padding: 15,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: '#1a1a1a',
+                        titleColor: '#ffffff',
+                        bodyColor: '#a0a0a0',
+                        borderColor: '#2a2a2a',
+                        borderWidth: 1,
+                        padding: 12,
+                        callbacks: {
+                            label: function(context) {
+                                if (context.datasetIndex === 0) {
+                                    return 'Faturamento: R$ ' + context.parsed.y.toLocaleString('pt-BR', {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2
+                                    });
+                                } else {
+                                    return 'OS Completas: ' + context.parsed.y;
+                                }
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        beginAtZero: true,
+                        grid: {
+                            color: '#2a2a2a',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#a0a0a0',
+                            callback: function(value) {
+                                return 'R$ ' + (value / 1000) + 'k';
+                            }
+                        }
+                    },
+                    y1: {
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        beginAtZero: true,
+                        grid: {
+                            drawOnChartArea: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#a0a0a0'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#a0a0a0'
+                        }
+                    }
+                }
+            }
+        });
+    }
 }
 
 // ===================================
@@ -802,3 +917,324 @@ if (reducedMotion.matches) {
 console.log('🚀 Sistema Volmaster carregado com sucesso!');
 console.log('📊 Plataforma de Gestão de Oficina v1.0');
 console.log('📱 Otimizações mobile ativadas!');
+// ===================================
+// Animações de Entrada (AOS - Animate On Scroll)
+// ===================================
+function initAOS() {
+    const elements = document.querySelectorAll('[data-aos]');
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('aos-animate');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    elements.forEach(element => {
+        observer.observe(element);
+    });
+}
+
+// Inicializar AOS quando o DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAOS);
+} else {
+    initAOS();
+}
+
+// ===================================
+// Modal de Ordem de Serviço
+// ===================================
+function openOSModal(osId) {
+    const modal = document.getElementById('osModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Aqui você carregaria os dados da OS do servidor
+        console.log('Abrindo OS:', osId);
+    }
+}
+
+function closeOSModal() {
+    const modal = document.getElementById('osModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+// Fechar modal ao pressionar ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeOSModal();
+    }
+});
+
+// Controle de Tabs do Modal
+function initOSTabs() {
+    const tabs = document.querySelectorAll('.os-tab');
+    const tabContents = document.querySelectorAll('.os-tab-content');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
+            
+            // Remover active de todas as tabs
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(tc => tc.classList.remove('active'));
+            
+            // Adicionar active na tab clicada
+            this.classList.add('active');
+            const targetContent = document.getElementById(`tab-${targetTab}`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+        });
+    });
+}
+
+// Adicionar event listeners aos botões de detalhes
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.btn-secondary.btn-sm')) {
+        const osCard = e.target.closest('.os-card');
+        if (osCard) {
+            const osId = osCard.querySelector('.os-header h3').textContent;
+            openOSModal(osId);
+        }
+    }
+});
+
+// Inicializar tabs quando o documento carregar
+setTimeout(initOSTabs, 100);
+
+// ===================================
+// Atualização em Tempo Real das Baias
+// ===================================
+function updateBaysStatus() {
+    // Simular atualização em tempo real
+    const progressBars = document.querySelectorAll('.bay-progress .progress-bar');
+    
+    progressBars.forEach(bar => {
+        const currentWidth = parseInt(bar.style.width);
+        if (currentWidth < 100) {
+            // Incrementar 1% a cada 30 segundos (simulação)
+            //const newWidth = Math.min(currentWidth + 1, 100);
+            //bar.style.width = newWidth + '%';
+        }
+    });
+}
+
+// Atualizar a cada 30 segundos
+setInterval(updateBaysStatus, 30000);
+
+// ===================================
+// Alertas Inteligentes - Marcar como lido
+// ===================================
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.alert-action')) {
+        const alertItem = e.target.closest('.alert-item');
+        if (alertItem) {
+            alertItem.style.opacity = '0.5';
+            alertItem.style.pointerEvents = 'none';
+            
+            // Atualizar contador de alertas
+            const alertCount = document.querySelector('.alert-count');
+            if (alertCount) {
+                const current = parseInt(alertCount.textContent);
+                if (current > 0) {
+                    alertCount.textContent = current - 1;
+                }
+            }
+        }
+    }
+});
+
+// ===================================
+// Atribuir OS à Baia Disponível
+// ===================================
+document.addEventListener('click', function(e) {
+    if (e.target.closest('.btn-assign')) {
+        const bayCard = e.target.closest('.bay-card');
+        const bayNumber = bayCard.querySelector('.bay-number').textContent;
+        
+        // Aqui você abriria um modal para selecionar a OS
+        alert(`Atribuir Ordem de Serviço à ${bayNumber}`);
+        // Em produção, isso abriria um modal com lista de OS pendentes
+    }
+});
+
+// ===================================
+// Contador de Tempo de Execução das OS
+// ===================================
+function updateExecutionTimers() {
+    const timelineItems = document.querySelectorAll('.timeline-item.in-progress');
+    
+    timelineItems.forEach(item => {
+        // Aqui você atualizaria o tempo decorrido das OS em andamento
+        // Exemplo: calcular diferença entre hora atual e hora de início
+    });
+}
+
+// Atualizar a cada minuto
+setInterval(updateExecutionTimers, 60000);
+
+// ===================================
+// Notificações Toast
+// ===================================
+function showToast(message, type = 'info') {
+    // Criar elemento de toast
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+        <span>${message}</span>
+    `;
+    
+    // Adicionar estilos inline caso não existam no CSS
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#3b82f6'};
+        color: white;
+        padding: 16px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 10001;
+        animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    // Remover após 3 segundos
+    setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// Adicionar animações ao documento
+if (!document.getElementById('toast-animations')) {
+    const style = document.createElement('style');
+    style.id = 'toast-animations';
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// ===================================
+// Confirmação de Ações Críticas
+// ===================================
+document.addEventListener('click', function(e) {
+    const deleteBtn = e.target.closest('.btn-action .fa-trash');
+    if (deleteBtn) {
+        e.preventDefault();
+        if (confirm('Tem certeza que deseja excluir este item?')) {
+            showToast('Item excluído com sucesso!', 'success');
+            // Aqui você faria a exclusão via API
+        }
+    }
+});
+
+// ===================================
+// Logs de Performance
+// ===================================
+if (window.performance && window.performance.timing) {
+    window.addEventListener('load', function() {
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        const connectTime = perfData.responseEnd - perfData.requestStart;
+        const renderTime = perfData.domComplete - perfData.domLoading;
+        
+        console.log('📈 Performance:');
+        console.log(`- Tempo total de carregamento: ${pageLoadTime}ms`);
+        console.log(`- Tempo de conexão: ${connectTime}ms`);
+        console.log(`- Tempo de renderização: ${renderTime}ms`);
+    });
+}
+
+// ===================================
+// Gerenciamento de Mecânicos
+// ===================================
+function showMechanicsManagement() {
+    const modal = new bootstrap.Modal(document.getElementById('mechanicsManagementModal'));
+    modal.show();
+}
+
+function editMechanic(mechanicId) {
+    // Implementar lógica de edição
+    alert(`Editando mecânico: ${mechanicId}`);
+    // Aqui você preencheria o formulário com os dados do mecânico
+}
+
+function deleteMechanic(mechanicId) {
+    if (confirm(`Deseja realmente remover este mecânico?`)) {
+        alert(`Mecânico ${mechanicId} removido!`);
+        showToast('Mecânico removido com sucesso!', 'success');
+        // Aqui você faria a remoção via API
+    }
+}
+
+// Adicionar mecânico via formulário
+document.addEventListener('DOMContentLoaded', function() {
+    const mechanicForm = document.getElementById('mechanicForm');
+    if (mechanicForm) {
+        mechanicForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('mechanicName').value;
+            const specialty = document.getElementById('mechanicSpecialty').value;
+            const years = document.getElementById('mechanicYears').value;
+            
+            // Validar dados
+            if (!name || !specialty || !years) {
+                alert('Preencha todos os campos obrigatórios!');
+                return;
+            }
+            
+            // Simular salvamento
+            alert(`Mecânico ${name} cadastrado com sucesso!\nEspecialidade: ${specialty}\nExperiência: ${years} anos`);
+            showToast('Mecânico cadastrado com sucesso!', 'success');
+            
+            // Limpar formulário
+            mechanicForm.reset();
+            
+            // Fechar modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('mechanicsManagementModal'));
+            if (modal) {
+                modal.hide();
+            }
+        });
+    }
+});
